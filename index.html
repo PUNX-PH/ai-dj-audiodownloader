@@ -11,11 +11,6 @@
       padding: 2rem;
       background-color: #f9f9f9;
     }
-    img {
-      max-width: 300px;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-    }
     h1 {
       font-size: 2rem;
     }
@@ -38,25 +33,20 @@
 </head>
 <body>
   <h1 id="title">Loading...</h1>
-  <img id="image" src="" alt="Album Cover" />
-  <br/>
   <audio id="audioPlayer" controls>
     Your browser does not support the audio element.
   </audio>
   <br/>
-  <button onclick="downloadSong()">Download</button>
+  <button onclick="downloadSong()">Download Song</button>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const title = decodeURIComponent(params.get("title") || "Unknown Title");
-    const image = decodeURIComponent(params.get("image") || "");
     const audio = decodeURIComponent(params.get("audio") || "");
 
-    console.log("Image URL:", image); // Helpful debug
     console.log("Audio URL:", audio);
 
     document.getElementById("title").innerText = title;
-    document.getElementById("image").src = image;
     document.getElementById("audioPlayer").src = audio;
 
     function downloadSong() {
