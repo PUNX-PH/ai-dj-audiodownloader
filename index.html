@@ -5,9 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Song Viewer</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 2rem; }
-    img { max-width: 300px; border-radius: 10px; }
-    h1 { font-size: 2rem; }
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background-color: #f9f9f9;
+    }
+    img {
+      max-width: 300px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    audio {
+      width: 300px;
+      margin-top: 1rem;
+    }
     button {
       display: inline-block;
       margin-top: 20px;
@@ -23,7 +38,11 @@
 </head>
 <body>
   <h1 id="title">Loading...</h1>
-  <img id="image" src="" alt="Album Cover" />
+  <img id="image" src="" alt="Album Cover" onerror="this.style.display='none';" />
+  <br/>
+  <audio id="audioPlayer" controls>
+    Your browser does not support the audio element.
+  </audio>
   <br/>
   <button onclick="downloadSong()">Download Song</button>
 
@@ -35,6 +54,7 @@
 
     document.getElementById("title").innerText = title;
     document.getElementById("image").src = image;
+    document.getElementById("audioPlayer").src = audio;
 
     function downloadSong() {
       fetch(audio)
