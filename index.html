@@ -45,7 +45,7 @@
     const audio = decodeURIComponent(params.get("audio") || "");
 
     // Replace all '%' characters with spaces
-    title = title.replace(/%/g, ' ');
+    title = title.replace(/-/g, ' ');
 
     console.log("Audio URL:", audio);
 
