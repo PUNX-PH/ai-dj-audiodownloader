@@ -1,75 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Song Viewer</title>
   <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 2rem;
-      background-color: #f0f0f0;
-    }
-    img {
-      max-width: 80%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .btn {
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    img { max-width: 300px; border-radius: 10px; }
+    h1 { font-size: 2rem; }
+    a.button {
       display: inline-block;
       margin-top: 20px;
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #007bff;
+      padding: 10px 20px;
+      background: #007bff;
       color: white;
-      border: none;
-      border-radius: 8px;
       text-decoration: none;
-    }
-    .song-title {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #333;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <h1>Now Playing</h1>
-  <div id="content"></div>
+  <h1 id="title">Loading...</h1>
+  <img id="image" src="" alt="Album Cover" />
+  <br/>
+  <a id="download" class="button" href="#" download>Download Song</a>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const imgURL = params.get('img');
-    const audioURL = params.get('audio');
-    const songTitle = params.get('title');
+    const title = decodeURIComponent(params.get("title") || "Unknown Title");
+    const image = decodeURIComponent(params.get("image") || "");
+    const audio = decodeURIComponent(params.get("audio") || "");
 
-    const contentDiv = document.getElementById('content');
-
-    if (imgURL && audioURL) {
-      if (songTitle) {
-        const titleElem = document.createElement('div');
-        titleElem.className = 'song-title';
-        titleElem.textContent = decodeURIComponent(songTitle);
-        contentDiv.appendChild(titleElem);
-      }
-
-      const img = document.createElement('img');
-      img.src = imgURL;
-      img.alt = "Song Image";
-
-      const downloadBtn = document.createElement('a');
-      downloadBtn.href = audioURL;
-      downloadBtn.textContent = "Download Song";
-      downloadBtn.className = "btn";
-      downloadBtn.download = "";
-
-      contentDiv.appendChild(img);
-      contentDiv.appendChild(document.createElement('br'));
-      contentDiv.appendChild(downloadBtn);
-    } else {
-      contentDiv.textContent = "Missing image or audio URL.";
-    }
+    document.getElementById("title").innerText = title;
+    document.getElementById("image").src = image;
+    document.getElementById("download").href = audio;
   </script>
 </body>
 </html>
